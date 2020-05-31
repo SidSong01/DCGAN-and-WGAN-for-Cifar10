@@ -24,14 +24,15 @@ you can change the class # in `dataSet.py` to get different data from cifar10 da
 
 ## Details About How to Play
 
-run
+*run
 
 ```sh
 DCGAN.py
 ```
 for DCGAN model
 
-run
+
+*run
 
 ```sh
 WGAN.py
