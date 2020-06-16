@@ -1,4 +1,6 @@
-# Using the car pictures in cifar10 dataset to build DCGAN and WGAN for generating car pictures.
+# Overview
+
+Using the car pictures in cifar10 dataset to build DCGAN and WGAN for generating car pictures.
 
 [//]: # (Image References)
 
