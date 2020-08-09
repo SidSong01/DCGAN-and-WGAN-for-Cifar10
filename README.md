@@ -32,15 +32,21 @@ Using the car pictures in cifar10 dataset to build DCGAN and WGAN for generating
 2. mkdir dcgan_img, mkdir wgan_img
 
 3. `$ python dataSet.py`
-for `dataSet.py`, it is for getting the training data, save as TFRecords.
+
+For `dataSet.py`, it is for getting the training data, save as TFRecords.
+
 you can change the class # in `dataSet.py` to get different data from cifar10 dataset.
 
 4. if you want the DCGAN model
+
 `$ python dcgan.py`
+
 But I recommend rewrite it in JupyterHub for better debugging and displaying.
 
 5. If you want the WGAN model
+
 `$ python wgan.py`
+
 But I recommend rewrite it in JupyterHub for better debugging and displaying.
 
 ### The DCGAN model will be saved in the folder `ckpt`, you will see the last five saved models. The GenLog.log and loss of it will be saved in the folder `trainLog`.
