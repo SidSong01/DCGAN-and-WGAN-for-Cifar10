@@ -68,7 +68,7 @@ real_shape = [-1,32,32,3] # the size of samples
 data_total = 5000 # the number of samples
 batch_size = 64 
 noise_size = 128 
-max_iters = 120 # maximum number of iterations
+max_iters = 12000 # maximum number of iterations
 learning_rate = 0.0002 
 smooth = 0.1 # smooth parameter of label, label*(1 - smooth)
 beta1 = 0.4 # ADAM parameter
@@ -332,7 +332,7 @@ with open(r'./trainLog/loss_variation.loss','rb') as l:
 #save images
 with tf.Session() as sess:
 
-    meta_graph = tf.train.import_meta_graph('./ckpt/generator.ckpt-120.meta')
+    meta_graph = tf.train.import_meta_graph('./ckpt/generator.ckpt-12000.meta')
     meta_graph.restore(sess,tf.train.latest_checkpoint('./ckpt'))
     graph = tf.get_default_graph()
     inputs_noise = graph.get_tensor_by_name("inputs_noise:0")
