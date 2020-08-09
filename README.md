@@ -1,3 +1,7 @@
+# NOTE:
+-
+Please try to use them in JupyterHub, better for debugging and displaying.
+
 # Overview
 
 Using the car pictures in cifar10 dataset to build DCGAN and WGAN for generating car pictures.
