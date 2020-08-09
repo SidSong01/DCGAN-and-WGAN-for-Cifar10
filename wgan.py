@@ -1,4 +1,4 @@
-
+import time
 import numpy as np
 import tensorflow as tf
 import pickle
@@ -52,16 +52,16 @@ def batch_preprocess(data_batch):
 
 def Dir():
     import os
-    if not os.path.isdir('ckpt'):
-        os.mkdir('ckpt')
-    if not os.path.isdir('trainLog'):
-        os.mkdir('trainLog')
+    if not os.path.isdir('Wgan_ckpt'):
+        os.mkdir('Wgan_ckpt')
+    if not os.path.isdir('Wgan_trainLog'):
+        os.mkdir('Wgan_trainLog')
 
 real_shape = [-1,32,32,3]
 data_total = 5000 
 batch_size = 64 
 noise_size = 128 
-max_iters = 35000 
+max_iters = 35000
 learning_rate = 5e-5
 CRITIC_NUM = 5
 CLIP = [-0.1,0.1]
@@ -179,8 +179,8 @@ with tf.Session() as sess:
 
     coord = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
-
-
+    
+    time_start = time.time() # start timing
     for steps in range(max_iters):
         steps += 1
 
@@ -220,29 +220,44 @@ with tf.Session() as sess:
                   "Discriminator Loss: {:.4f}...".format(train_loss_d),
                   "Generator Loss: {:.4f}...".format(train_loss_g))
 
-        if steps % 300 ==0:
-            saver.save(sess, './ckpt/generator.ckpt', global_step=steps)
+        if steps % 500 ==0:
+            saver.save(sess, './Wgan_ckpt/generator.ckpt', global_step=steps)
 
     coord.request_stop()
     coord.join(threads)
     
-with open('./trainLog/loss_variation.loss', 'wb') as l:
+#end timing
+time_end = time.time()
+print('Finished! Time：%.2f s.'%(time_end-time_start))
+
+# Save info
+with open('./Wgan_trainLog/loss_variation.loss', 'wb') as l:
+    losses = np.array(losses)
+    pickle.dump(losses,l)
+    print('Saving loss info...')
+
+
+with open('./Wgan_trainLog/GenLog.log', 'wb') as g:
+    pickle.dump(GenLog, g)
+    print('Saving GenLog inof..')
+    
+with open('./Wgan_trainLog/loss_variation.loss', 'wb') as l:
     losses = np.array(losses)
     pickle.dump(losses,l)
     print('loss saved')
 
-with open('./trainLog/GenLog.log', 'wb') as g:
+with open('./Wgan_trainLog/GenLog.log', 'wb') as g:
     pickle.dump(GenLog, g)
     print('GenLog saved..')
 
 #output
-with open('./trainLog/GenLog.log', 'rb') as f:
+with open('./Wgan_trainLog/GenLog.log', 'rb') as f:
 
     GenLog = pickle.load(f)
     GenLog = np.array(GenLog)
     ImgShow(GenLog,[-1],10)
 
-with open(r'./trainLog/loss_variation.loss','rb') as l:
+with open(r'./Wgan_trainLog/loss_variation.loss','rb') as l:
     losses = pickle.load(l)
     fig, ax = plt.subplots(figsize=(20, 7))
     plt.plot(losses.T[2],losses.T[0], label='Discriminator  Loss')
@@ -255,8 +270,8 @@ with open(r'./trainLog/loss_variation.loss','rb') as l:
 
 with tf.Session() as sess:
 
-    meta_graph = tf.train.import_meta_graph('./ckpt/generator.ckpt-34800.meta')
-    meta_graph.restore(sess,tf.train.latest_checkpoint('./ckpt'))
+    meta_graph = tf.train.import_meta_graph('./Wgan_ckpt/generator.ckpt-35000.meta')
+    meta_graph.restore(sess,tf.train.latest_checkpoint('./Wgan_ckpt'))
     graph = tf.get_default_graph()
     inputs_noise = graph.get_tensor_by_name("inputs_noise:0")
     d_outputs_fake = graph.get_tensor_by_name("generator/Tanh:0")
