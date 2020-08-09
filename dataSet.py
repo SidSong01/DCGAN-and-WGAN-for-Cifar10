@@ -4,6 +4,16 @@ import os
 import tensorflow as tf
 import pickle
 
+# the cifar10 dataset info
+"""
+classifications:
+    0:airplane 1:automobile 2:bird 3:cat 4:deer
+    5:dog 6:fox 7:horse 8:ship 9:truck
+"""
+
+
+
+# for showing outpu images
 def ImgShow(IMG,index,nums):
 
     fig, axes = plt.subplots(figsize=( nums+2,len(index)+2), nrows=len(index), ncols=nums, sharey=True, sharex=True)
@@ -22,6 +32,7 @@ def ImgShow(IMG,index,nums):
     fig.tight_layout(pad=0)
     plt.show()
 
+# batch normalization
 def NORMALIZATION(data):
     from sklearn.preprocessing import MinMaxScaler
     minmax = MinMaxScaler()
@@ -118,6 +129,7 @@ def GetCifar10Data(CifarPath, kind):
 
     return C,L
 
+# read all cifar10 data
 def GetCifar10AllData(kind):
     
     C, L = GetCifar10Data(r'./cifar-10-batches-py/data_batch_1', kind)
@@ -128,10 +140,20 @@ def GetCifar10AllData(kind):
         L = np.concatenate((L, label))
     return C,L
 
+
+# the cifar10 dataset info
+"""
+classifications:
+    0:airplane 1:automobile 2:bird 3:cat 4:deer
+    5:dog 6:fox 7:horse 8:ship 9:truck
+"""
+
 if __name__ == '__main__':
+    # certain type, change the number for which type
     C,L = GetCifar10AllData(1)
     C = NORMALIZATION(C)
-
+    
+    # dispaly
     imgs = C[-26:-1].reshape(-1,3,32,32).transpose((0,2,3,1))
     fig, axes = plt.subplots(figsize=(20, 7), nrows=5, ncols=5, sharex=True, sharey=True)
     for ax,img in zip(axes.flatten(),imgs):
@@ -139,5 +161,6 @@ if __name__ == '__main__':
         ax.yaxis.set_visible(False)
         ax.imshow(img)
     plt.show()
-
+    
+    #save it as TFR
     SaveByTFRecord(C,L,r'./TFR/class1',5)
