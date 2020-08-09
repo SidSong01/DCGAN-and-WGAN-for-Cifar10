@@ -49,11 +49,11 @@ But I recommend rewrite it in JupyterHub for better debugging and displaying.
 
 But I recommend rewrite it in JupyterHub for better debugging and displaying.
 
-### The DCGAN model will be saved in the folder `ckpt`, you will see the last five saved models. The GenLog.log and loss of it will be saved in the folder `trainLog`.
+#### The DCGAN model will be saved in the folder `ckpt`, you will see the last five saved models. The GenLog.log and loss of it will be saved in the folder `trainLog`.
 
-### The WGAN model will be saved in the folder `Wgan_ckpt`, you will see the last five saved models. The GenLog.log and loss of it will be saved in the folder `Wgan_trainLog`.
+#### The WGAN model will be saved in the folder `Wgan_ckpt`, you will see the last five saved models. The GenLog.log and loss of it will be saved in the folder `Wgan_trainLog`.
 
-### The output images will be saved in folder `dcgan_img` and `wgan_img`
+#### The output images will be saved in folder `dcgan_img` and `wgan_img`
 
 ---
 # WGAN model.
