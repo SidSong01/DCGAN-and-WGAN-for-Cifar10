@@ -72,7 +72,7 @@ for WGAN model
 
 * Noise size	128
 
-* Iterations	10000
+* Iterations	12000
 
 * Learning rate	0.0002
 
