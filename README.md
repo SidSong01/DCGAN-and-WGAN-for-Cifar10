@@ -3,6 +3,8 @@
 Please try to use them in JupyterHub, better for debugging and displaying.
 * See ipynb files for .ipynb versions.
 
+Please refer to the 'dcgan.py' for comments.
+
 # Overview
 
 Using the car pictures in cifar10 dataset to build DCGAN and WGAN for generating car pictures.
@@ -28,8 +30,8 @@ Using the car pictures in cifar10 dataset to build DCGAN and WGAN for generating
 
 ## How to use
 
-1. Get all the necessary enviroment and data
-2. mkdir dcgan_img, mkdir wgan_img
+1. Get all the necessary enviroment and data.
+2. mkdir dcgan_img, mkdir wgan_img, mkdir TFR.
 
 3. `$ python dataSet.py`
 
